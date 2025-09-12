@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todos los Trabajos</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <script src="https://kit.fontawesome.com/f6d6f5a997.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1 class="title">Todos los Trabajos</h1>
+            <div class="links">
+                <a href="{% url 'home' %}"><i class="fas fa-home"></i></a>
+                <a href="{% url 'all_jobs' %}"><i class="fas fa-list"></i></a>
+                <a href="{% url 'upload_job' %}"><i class="fas fa-upload"></i></a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <ul>
+            {% for job in jobs %}
+                <li class="job">
+                    <span style="color: darkblue; font-weight: bold;">{{ job.title }}</span> <br>
+                    <span style="font-size: 0.5em;">{{ job.date_posted }}</span> <br><br>
+                    <span style="font-size: 0.8em;">{{ job.description }}</span> <br> <br>
+                    <span style="font-size: 0.8em; font-weight: bold">Edad necesaria: {{ job.required_age }}</span> <br> <br>
+                    <span style="font-size: 0.8em; font-weight: bold">{{ job.contact_number }}</span> <br>
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+
+    <footer>
+        <a href="https://chat.whatsapp.com/yourlink" class="whatsapp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </footer>
+</body>
+</html>

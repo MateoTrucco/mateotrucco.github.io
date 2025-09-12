@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Cookie Clicker</title>
+</head>
+<body>
+
+  <h1>Cookie Clicker</h1>
+
+  <div id="cookie-container">
+    <div id="cookie" onclick="clickCookie()">
+      <div id="chocolate-chips"></div>
+      <div id="chocolate-chips"></div>
+      <div id="chocolate-chips"></div>
+      <div id="chocolate-chips"></div>
+      <div id="chocolate-chips"></div>
+      <div id="chocolate-chips"></div>
+      <div id="chocolate-chips"></div>
+      <div id="chocolate-chips"></div>
+      <div id="chocolate-chips"></div>
+      <div id="chocolate-chips"></div>
+    </div>
+
+    <div id="info-container">
+      <div id="cookies-per-click">Cookies por clic: 1</div>
+      <div id="cookies">Cookies: 0</div>
+      <div id="cookies-per-second">Cookies por segundo: 0</div>
+    </div>
+
+    <!-- Área para futuras compras -->
+    <div id="upgrade-container">
+      <button class="upgrade-button" onclick="buyUpgrade()">Mejora (Costo: 10 cookies)</button>
+      <button class="upgrade-button" onclick="buyCursor()">Comprar Cursor (Costo: 20 cookies)</button>
+    </div>
+
+    <!-- Área para los cursores -->
+    <div id="cursors-container"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

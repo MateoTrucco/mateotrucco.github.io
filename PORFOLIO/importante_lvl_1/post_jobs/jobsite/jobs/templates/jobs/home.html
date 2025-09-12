@@ -1,0 +1,34 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TRABAJOS | Mateo Trucco</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <script src="https://kit.fontawesome.com/f6d6f5a997.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <h1 class="title">Lista de Trabajos</h1>
+            <div class="links">
+                <a href="{% url 'home' %}"><i class="fas fa-home"></i></a>
+                <a href="{% url 'all_jobs' %}"><i class="fas fa-list"></i></a>
+                <a href="{% url 'upload_job' %}"><i class="fas fa-upload"></i></a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        {% for day in last_three_days %}
+            <a href="{% url 'jobs_by_date' job_date=day|date:"Y-m-d" %}">{{ day }}</a><br>
+        {% endfor %}
+    </main>
+
+    <footer>
+        <a href="https://chat.whatsapp.com/yourlink" class="whatsapp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </footer>
+</body>
+</html>
