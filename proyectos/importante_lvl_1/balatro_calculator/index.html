@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Calculadora Balatro - Estilo Juego</title>
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<div id="app">
+  <section id="panel-lateral">
+    <div id="smallBlind" class="panel-dark" style="text-align:center; font-weight:bold; font-size: 24px; color:#6abf6a; border-radius:6px; margin-bottom:12px;">
+      Ciega pequeña
+    </div>
+    <div id="blindInfo" class="panel-dark" style="font-size:20px; line-height:1.2; color:#f3f3f3;">
+      <div>Anota al menos</div>
+      <div style="font-size: 32px; font-weight:900; color:#d94343;">300</div>
+      <div>Recompensa: $$$</div>
+    </div>
+    <div id="puntajeRonda" class="panel-dark" style="font-size: 18px; margin-top: 10px;">
+      <div>Ronda puntuación</div>
+      <div class="num-red" id="puntajeActual">0</div>
+    </div>
+    <div id="cartaAlta" class="panel-dark" style="margin-top: 10px;">
+      <div style="font-size: 18px;">Carta más alta <span id="nivelMano">Nvl.1</span></div>
+      <div class="num-blue" id="valorCartaAlta">5</div>
+      <div class="num-red" style="font-size: 36px; font-weight: bold;">x 1</div>
+    </div>
+    <button class="button-red" id="btnPartidaInfo" style="margin-top: 12px;">Partida Info</button>
+    <div class="info-small" style="margin-top: 12px;">
+      <div>Manos <span id="manosJugadas">4</span></div>
+      <div>Descartes <span id="descartes">4</span></div>
+    </div>
+    <div class="info-small">
+      <div>Apuesta inicial <span id="apuestaInicial">1/8</span></div>
+      <div>Ronda <span id="rondaNumero">1</span></div>
+    </div>
+    <button class="button-orange" id="btnOpciones" style="margin-top: 16px;">Opciones</button>
+  </section>
+  <section id="cartas-area">
+    <div id="tabs">
+      <button class="button-blue active" data-tab="cartas">Cartas</button>
+      <button class="button-blue" data-tab="jokers">Comodines</button>
+      <button class="button-blue" data-tab="manos">Manos</button>
+    </div>
+    <div id="cartas" class="tab-content active">
+      <div id="playfield-cartas">
+        <button type="button" data-carta="0">Q<span>♠</span></button>
+        <button type="button" data-carta="1">10<span>♠</span></button>
+        <button type="button" data-carta="2">9<span>♠</span></button>
+        <button type="button" data-carta="3">8<span>♣</span></button>
+        <button type="button" data-carta="4">5<span>♠</span></button>
+        <button type="button" data-carta="5">4<span>♠</span></button>
+        <button type="button" data-carta="6">3<span>♠</span></button>
+        <button type="button" data-carta="7">2<span>♣</span></button>
+      </div>
+    </div>
+    <div id="jokers" class="tab-content">
+      <div id="joker-area"></div>
+    </div>
+    <div id="manos" class="tab-content">
+      <div id="hand-levels"></div>
+    </div>
+  </section>
+  <section id="modificadores-panel">
+    <h2 style="font-weight:bold; font-size: 20px; margin-bottom: 10px;">Modificadores</h2>
+    <div id="mod-cartas" class="mod-tab">
+      <label>Valor: <input type="text" name="valor" style="width:50px;" placeholder="2-10, J, Q, K, A"></label><br>
+      <label>Palo: 
+        <select name="palo">
+          <option value="♠">♠</option>
+          <option value="♣">♣</option>
+          <option value="♥">♥</option>
+          <option value="♦">♦</option>
+        </select>
+      </label><br>
+      <label><input type="radio" name="mejora" value="glass"> Glass</label><br>
+      <label><input type="radio" name="mejora" value="steel"> Steel</label><br>
+      <label><input type="radio" name="mejora" value="gold"> Gold</label><br>
+      <label><input type="radio" name="mejora" value="lucky"> Lucky</label>
+      <div style="margin-top: 12px;">
+        <label>Edición:</label><br>
+        <select name="edicion">
+          <option value="base">Base</option>
+          <option value="foil">Foil</option>
+          <option value="holo">Holográfica</option>
+          <option value="poly">Polychrome</option>
+        </select>
+      </div>
+      <div style="margin-top: 12px;">
+        <label>Sello:</label><br>
+        <select name="sello">
+          <option value="none">Ninguno</option>
+          <option value="rojo">Rojo</option>
+          <option value="dorado">Dorado</option>
+          <option value="azul">Azul</option>
+          <option value="purpura">Púrpura</option>
+        </select>
+      </div>
+    </div>
+    <div id="mod-jokers" class="mod-tab" style="display: none;">
+      <label><input type="checkbox" name="joker-mod" value="foil"> Foil</label><br>
+      <label><input type="checkbox" name="joker-mod" value="holo"> Holográfica</label><br>
+      <label><input type="checkbox" name="joker-mod" value="poly"> Polychrome</label><br>
+      <label><input type="checkbox" name="joker-mod" value="disabled"> Desactivado</label>
+      <div style="margin-top: 12px;">
+        <label>Valor: <input type="number" id="joker-val" min="0" value="0"></label>
+      </div>
+    </div>
+    <div id="mano-nivel">
+      <div>Mano: 
+        <select id="mano" style="font-weight:bold;">
+          <option value="high_card">Carta Alta</option>
+          <option value="pair">Par</option>
+          <option value="two_pair">Doble Par</option>
+          <option value="three_of_a_kind">Trío</option>
+          <option value="straight">Escalera</option>
+          <option value="flush">Color</option>
+          <option value="full_house">Full House</option>
+          <option value="four_of_a_kind">Poker</option>
+          <option value="straight_flush">Escalera Color</option>
+          <option value="five_of_a_kind">Quintilla</option>
+          <option value="flush_house">Full de Color</option>
+          <option value="flush_five">Cinco de Color</option>
+        </select>
+      </div>
+      <div>Nvl. <input id="nivelManoInput" type="number" min="1" max="10" value="1" style="width:40px; font-weight:bold;"/></div>
+    </div>
+    <div id="modoOptimo-container" style="margin-top: 15px;">
+      <input type="checkbox" id="modoOptimo">
+      <label for="modoOptimo">Calcular jugada perfecta (puede tardar)</label>
+    </div>
+    <button id="calcular-btn">Calcular puntuación</button>
+    <div id="cargando" style="display:none;">Calculando jugadas posibles... Esto puede tardar.</div>
+    <pre id="resultado"></pre>
+  </section>
+</div>
+<script src="js/script.js"></script>
+</body>
+</html>
