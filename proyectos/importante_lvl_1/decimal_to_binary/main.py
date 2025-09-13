@@ -17,7 +17,8 @@ elif platform.system() in ["Darwin", "Linux"]:
         pass
 
 def sleep(seconds):
-    """Pauses execution for the specified number of seconds.
+    """
+    Pauses execution for the specified number of seconds.
 
     Args:
         seconds (float): Number of seconds to pause.
@@ -25,7 +26,8 @@ def sleep(seconds):
     time.sleep(seconds)
 
 def decimal_to_binary(n):
-    """Converts a decimal number to its binary representation.
+    """
+    Converts a decimal number to its binary representation.
 
     Args:
         n (int): Decimal number to convert.
@@ -43,7 +45,8 @@ def decimal_to_binary(n):
     return binary
 
 def animate_loading_bar(label, callback, step=0, duration=2000):
-    """Animates a loading bar in the GUI with color changes based on percentage.
+    """
+    Animates a loading bar in the GUI with color changes based on percentage.
 
     Args:
         label (tk.Label): Label to display the loading bar.
@@ -72,7 +75,8 @@ def animate_loading_bar(label, callback, step=0, duration=2000):
         callback()
 
 def convert_to_binary():
-    """Converts the input decimal number to binary and updates the GUI.
+    """
+    Converts the input decimal number to binary and updates the GUI.
 
     Retrieves the input, validates it, shows a loading animation, and displays the result.
     """
@@ -98,7 +102,8 @@ def convert_to_binary():
         translate_button.config(state="normal")
 
 def show_result(num):
-    """Displays the binary conversion result.
+    """
+    Displays the binary conversion result.
 
     Args:
         num (int): Decimal number to convert.
