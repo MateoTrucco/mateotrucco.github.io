@@ -18,8 +18,22 @@ wait(taim) - espera taim segundos
 import time
 import winsound
 import platform
+import tkinter as tk
 
-def rezize(tk):
+colors = {
+    "-": "#ECE2D0",
+    "+": "#7FD1B9",
+    "++":"#7A6563",
+    
+    "b": "#000000",
+    "w": "#FFFFFF",
+}
+
+def enable_high_dpi():
+    """Enables high DPI scaling for Tkinter applications.
+
+    Configures the application for high-resolution displays on Windows, macOS, or Linux.
+    """
     if platform.system() == "Windows":
         try:
             from ctypes import windll
@@ -47,14 +61,14 @@ def wInput(texto, speed=0.03):
 
 def playAgain():
     write("\n--------------------------------------------", 0.01)
-    again = wInput("\n¿Quieres jugar de nuevo? (s/n): ")
+    again = wInput("\n¿Quieres intentar de nuevo? (s/n): ")
     wait()
-    if again == "s" or again == "S" or again == "y" or again == "Y" or again == "si" or again == "SI" or again == "yes" or again == "YES":
-        write("\nOk, vuelve a intentarlo!\n")
+    if again.lower() == 's' or again.lower() == 'y':
+        write("\nOk, try again!\n")
         write("--------------------------------------------\n", 0.01)
         
     else: 
-        write("\n¡Gracias por jugar!\n")
+        write("\nThanks for playing!\n")
         write("--------------------------------------------\n", 0.01)
         return exit()
 

@@ -1,71 +1,80 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
 import subprocess
-import os
+import os, sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
+from base_functions import enable_high_dpi
 
-def seleccionar_archivo():
-    # Abrir cuadro de diálogo para seleccionar archivo .py
-    archivo = filedialog.askopenfilename(filetypes=[("Archivos Python", "*.py")])
-    if archivo:
-        entry_archivo.delete(0, tk.END)  # Limpiar entrada
-        entry_archivo.insert(0, archivo)  # Colocar ruta en la entrada
+enable_high_dpi()
 
-def seleccionar_destino():
-    # Abrir cuadro de diálogo para elegir carpeta de destino
-    destino = filedialog.askdirectory()
-    if destino:
-        entry_destino.delete(0, tk.END)  # Limpiar entrada
-        entry_destino.insert(0, destino)  # Colocar ruta en la entrada
+def select_file():
+    """
+    Opens a file dialog to select a Python (.py) file and updates the entry field.
+    """
+    file_path = filedialog.askopenfilename(filetypes=[("Python Files", "*.py")])
+    if file_path:
+        file_entry.delete(0, tk.END)
+        file_entry.insert(0, file_path)
 
-def convertir_a_exe():
-    archivo_py = entry_archivo.get()
-    destino = entry_destino.get()
+def select_destination():
+    """
+    Opens a directory dialog to select the destination folder and updates the entry field.
+    """
+    folder_path = filedialog.askdirectory()
+    if folder_path:
+        destination_entry.delete(0, tk.END)
+        destination_entry.insert(0, folder_path)
 
-    # Verificar si se han seleccionado archivo y destino
-    if not archivo_py or not destino:
-        messagebox.showerror("Error", "Debes seleccionar un archivo y una carpeta de destino.")
+def convert_to_exe():
+    """
+    Converts the selected Python file to an executable and saves it in a named subfolder.
+
+    Creates a subfolder named after the Python file (without .py) in the destination folder,
+    and saves the .exe and build files there.
+    """
+    file_path = file_entry.get()
+    destination_folder = destination_entry.get()
+
+    if not file_path or not destination_folder:
+        messagebox.showerror("Error", "Please select a Python file and a destination folder.")
         return
 
-    # Ruta de salida para el archivo .exe
-    salida = os.path.join(destino, os.path.basename(archivo_py).replace(".py", ".exe"))
+    file_name = os.path.basename(file_path).replace(".py", "")
+    output_folder = os.path.join(destination_folder, file_name)
+    os.makedirs(output_folder, exist_ok=True)
 
-    # Comando para ejecutar PyInstaller
-    comando = f'pyinstaller --onefile --noconsole --distpath "{destino}" --workpath "{destino}/build" "{archivo_py}"'
-    
+    output_exe = os.path.join(output_folder, f"{file_name}.exe")
+
+    command = f'pyinstaller --onefile --noconsole --distpath "{output_folder}" --workpath "{output_folder}/build" "{file_path}"'
+
     try:
-        # Ejecutar PyInstaller
-        subprocess.run(comando, check=True, shell=True)
-
-        # Mostrar mensaje de éxito
-        messagebox.showinfo("Éxito", f"El archivo se ha convertido exitosamente en: {salida}")
+        subprocess.run(command, check=True, shell=True)
+        messagebox.showinfo("Success", f"The file was successfully converted to:\n{output_exe}")
     except subprocess.CalledProcessError as e:
-        messagebox.showerror("Error", f"Ocurrió un error al convertir el archivo: {e}")
+        messagebox.showerror("Error", f"An error occurred while converting the file:\n{e}")
 
-# Crear la ventana principal
 ventana = tk.Tk()
 ventana.title("Convertir Python a EXE")
 
-# Crear widgets
-label_archivo = tk.Label(ventana, text="Selecciona el archivo .py:")
-label_archivo.grid(row=0, column=0, padx=10, pady=10, sticky="e")
+file_label = tk.Label(ventana, text="Selecciona el archivo .py:")
+file_label.grid(row=0, column=0, padx=10, pady=10, sticky="e")
 
-entry_archivo = tk.Entry(ventana, width=40)
-entry_archivo.grid(row=0, column=1, padx=10, pady=10)
+file_entry = tk.Entry(ventana, width=40)
+file_entry.grid(row=0, column=1, padx=10, pady=10)
 
-boton_archivo = tk.Button(ventana, text="Seleccionar archivo", command=seleccionar_archivo)
-boton_archivo.grid(row=0, column=2, padx=10, pady=10)
+file_button = tk.Button(ventana, text="Seleccionar archivo", command=select_file)
+file_button.grid(row=0, column=2, padx=10, pady=10)
 
-label_destino = tk.Label(ventana, text="Selecciona la carpeta de destino:")
-label_destino.grid(row=1, column=0, padx=10, pady=10, sticky="e")
+destination_label = tk.Label(ventana, text="Selecciona la carpeta de destino:")
+destination_label.grid(row=1, column=0, padx=10, pady=10, sticky="e")
 
-entry_destino = tk.Entry(ventana, width=40)
-entry_destino.grid(row=1, column=1, padx=10, pady=10)
+destination_entry = tk.Entry(ventana, width=40)
+destination_entry.grid(row=1, column=1, padx=10, pady=10)
 
-boton_destino = tk.Button(ventana, text="Seleccionar carpeta", command=seleccionar_destino)
-boton_destino.grid(row=1, column=2, padx=10, pady=10)
+destination_button = tk.Button(ventana, text="Seleccionar carpeta", command=select_destination)
+destination_button.grid(row=1, column=2, padx=10, pady=10)
 
-boton_convertir = tk.Button(ventana, text="Convertir a EXE", command=convertir_a_exe)
-boton_convertir.grid(row=2, column=0, columnspan=3, padx=10, pady=20)
+convert_button = tk.Button(ventana, text="Convertir a EXE", command=convert_to_exe)
+convert_button.grid(row=2, column=0, columnspan=3, padx=10, pady=20)
 
-# Iniciar la interfaz gráfica
 ventana.mainloop()

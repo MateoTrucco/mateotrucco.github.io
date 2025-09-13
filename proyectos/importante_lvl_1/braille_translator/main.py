@@ -1,7 +1,10 @@
 import tkinter as tk
-from ....base_functions import rezize
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
+from base_functions import enable_high_dpi, colors
 
-rezize(tk)
+enable_high_dpi()
 
 BRAILLE_ALPHABET = {
     ' ': [0, 0, 0, 0, 0, 0],
@@ -66,7 +69,7 @@ def render_braille_char(char):
         ['•' if dots[2] else ' ', '•' if dots[5] else ' ']
     ]
 
-def translate_to_braille_board(text, max_chars=12):
+def translate_to_braille_board(text, max_chars=10):
     """
     Translates text to a horizontal braille board with dynamic line breaks.
 
@@ -127,46 +130,72 @@ def update_board(event=None):
         result = translate_to_braille_board(text)
         output_label.config(text=result, wraplength=window.winfo_width() - 10)
 
-bg_color = "#3c739f"
+bg_body = colors["++"]
+bg_int = colors["-"]
+fg_int = colors["b"]
+bg_button = colors["+"]
+fg_button = colors["b"]
 
 window = tk.Tk()
 window.title("Braille Translator")
-window.geometry("600x500")
+window.geometry("580x450")
 window.minsize(400, 250)
-window.configure(bg=bg_color)
+window.configure(bg=bg_body)
 
-canvas = tk.Canvas(window, bg=bg_color, highlightthickness=0)
-scrollbar = tk.Scrollbar(window, orient="vertical", command=canvas.yview)
-scrollable_frame = tk.Frame(canvas, bg=bg_color)
+window.columnconfigure(0, weight=1)
+window.rowconfigure(1, weight=0)  
+window.rowconfigure(2, weight=0)  
+window.rowconfigure(3, weight=1)  
 
-scrollable_frame.bind(
+label = tk.Label(
+    window, text="Braille Translator", font=("Arial", 16, "bold"), bg=bg_int, fg=fg_int,
+    borderwidth=3, relief="solid"
+)
+label.grid(row=0, column=0, padx=10, pady=(10, 5), sticky="ew")
+
+input_text = tk.Entry(
+    window, font=("Arial", 14), bg=bg_int, fg=fg_int, borderwidth=3, relief="solid", cursor="xterm"
+)
+input_text.grid(row=1, column=0, padx=20, pady=5, sticky="ew", ipady=5)
+
+translate_button = tk.Button(
+    window, text="TRANSLATE", command=translate_text, font=("Arial", 14), bg=bg_button, fg=fg_button,
+    borderwidth=3, relief="raised", cursor="hand2", activebackground=bg_int, activeforeground=fg_int
+)
+translate_button.grid(row=2, column=0, padx=20, pady=5, sticky="ew")
+
+output_frame = tk.Frame(window, bg=bg_body)
+output_frame.grid(row=3, column=0, padx=10, pady=10, sticky="nsew")
+output_frame.columnconfigure(0, weight=1)
+output_frame.rowconfigure(0, weight=1)
+
+output_canvas = tk.Canvas(output_frame, bg=bg_int, highlightthickness=0)
+output_scrollbar = tk.Scrollbar(output_frame, orient="vertical", command=output_canvas.yview)
+output_scrollable_frame = tk.Frame(output_canvas, bg=bg_int)
+
+output_scrollable_frame.bind(
     "<Configure>",
-    lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+    lambda e: output_canvas.configure(scrollregion=output_canvas.bbox("all"))
 )
 
-canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
-canvas.configure(yscrollcommand=scrollbar.set)
+output_canvas.create_window((0, 0), window=output_scrollable_frame, anchor="n")
+output_canvas.configure(yscrollcommand=output_scrollbar.set)
 
-label = tk.Label(scrollable_frame, text="Enter text (a-z, ñ, spaces):", font=("Arial", 16), bg=bg_color, fg="white")
-label.pack(pady="10 0", fill="both")
+output_canvas.grid(row=0, column=0, sticky="nsew")
+output_scrollbar.grid(row=0, column=1, sticky="ns")
 
-input_text = tk.Entry(scrollable_frame, width=40, font=("Arial", 14), background="white", fg="black", borderwidth=3, relief="solid", cursor="xterm")
-input_text.pack(pady=10, padx=20, fill="both")
+output_label = tk.Label(
+    output_scrollable_frame, text="", font=("Courier", 12, "bold"), bg=bg_int, fg=fg_int,
+    anchor="center", justify="center", wraplength=window.winfo_width() - 20
+)
+output_label.pack(fill="both", expand=True)
 
-translate_button = tk.Button(scrollable_frame, text="Translate", command=translate_text, font=("Arial", 14), bg="#409243", fg="white", borderwidth=3, relief="raised", cursor="hand2", activebackground="#6AB76D")
-translate_button.pack()
+def update_output_wraplength(event=None):
+    """Update the wraplength of the output_label dynamically."""
+    max_width = 800
+    current_width = min(window.winfo_width() - 20, max_width)
+    output_label.config(wraplength=current_width)
 
-output_label = tk.Label(scrollable_frame, text="", font=("Courier", 12), bg="white", anchor="nw", justify="left", borderwidth=3, relief="solid")
-output_label.pack(padx=10, pady=10, fill="both", expand=True)
-
-canvas.pack(side="left", fill="both", expand=True, padx=10, pady=10)
-scrollbar.pack(side="right", fill="y")
-
-window.bind("<Configure>", update_board)
-
-def on_mouse_wheel(event):
-    canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-
-window.bind_all("<MouseWheel>", on_mouse_wheel)
+window.bind("<Configure>", lambda event: (update_board(), update_output_wraplength()))
 
 window.mainloop()
