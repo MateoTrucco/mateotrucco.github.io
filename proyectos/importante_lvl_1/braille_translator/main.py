@@ -1,8 +1,6 @@
 import tkinter as tk
-from tkinter import messagebox
 import platform
 
-# Enable high DPI scaling
 if platform.system() == "Windows":
     try:
         from ctypes import windll
@@ -147,7 +145,6 @@ window.geometry("600x500")
 window.minsize(400, 250)
 window.configure(bg=bg_color)
 
-# Create scrollable frame
 canvas = tk.Canvas(window, bg=bg_color, highlightthickness=0)
 scrollbar = tk.Scrollbar(window, orient="vertical", command=canvas.yview)
 scrollable_frame = tk.Frame(canvas, bg=bg_color)
@@ -160,7 +157,6 @@ scrollable_frame.bind(
 canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
 canvas.configure(yscrollcommand=scrollbar.set)
 
-# Pack widgets
 label = tk.Label(scrollable_frame, text="Enter text (a-z, ñ, spaces):", font=("Arial", 16), bg=bg_color, fg="white")
 label.pack(pady="10 0", fill="both")
 
@@ -173,14 +169,11 @@ translate_button.pack()
 output_label = tk.Label(scrollable_frame, text="", font=("Courier", 12), bg="white", anchor="nw", justify="left", borderwidth=3, relief="solid")
 output_label.pack(padx=10, pady=10, fill="both", expand=True)
 
-# Pack canvas and scrollbar
 canvas.pack(side="left", fill="both", expand=True, padx=10, pady=10)
 scrollbar.pack(side="right", fill="y")
 
-# Bind resize event
 window.bind("<Configure>", update_board)
 
-# Bind mouse wheel to scroll
 def on_mouse_wheel(event):
     canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 

@@ -1,58 +1,136 @@
+import tkinter as tk
+from tkinter import messagebox
+import platform
 import time
 
-try:
-    from colorama import Fore, Style
-    COLORAMA_AVAILABLE = True
-except ImportError:
-    COLORAMA_AVAILABLE = False
+# Enable high DPI scaling
+if platform.system() == "Windows":
+    try:
+        from ctypes import windll
+        windll.shcore.SetProcessDpiAwareness(1)
+    except:
+        pass
+elif platform.system() in ["Darwin", "Linux"]:
+    try:
+        tk.Tk().call('tk', 'scaling', 2.0)
+    except:
+        pass
 
+def sleep(seconds):
+    """Pauses execution for the specified number of seconds.
 
-def slip(taim):
-    time.sleep(taim)
+    Args:
+        seconds (float): Number of seconds to pause.
+    """
+    time.sleep(seconds)
 
-def barra_de_carga():
-    if COLORAMA_AVAILABLE:
-        print(Fore.MAGENTA + "Cargando:", end=" ")
-        colores = [Fore.RED, Fore.RED, Fore.RED, Fore.RED, Fore.RED, Fore.RED, Fore.YELLOW, Fore.YELLOW, Fore.YELLOW, Fore.YELLOW, Fore.YELLOW, Fore.YELLOW, Fore.GREEN, Fore.GREEN, Fore.GREEN, Fore.GREEN, Fore.GREEN, Fore.GREEN, Fore.MAGENTA, Fore.MAGENTA]
-    else:
-        print("Cargando:", end=" ")
-        colores = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
-    
-    for i in range(20):
-        time.sleep(0.1)
-        print(colores[i] + "█" + (Style.RESET_ALL if COLORAMA_AVAILABLE else ""), end="", flush=True)
-    print(Style.RESET_ALL if COLORAMA_AVAILABLE else "")
+def decimal_to_binary(n):
+    """Converts a decimal number to its binary representation.
 
-def decimal_a_binario(n):
+    Args:
+        n (int): Decimal number to convert.
+
+    Returns:
+        str: Binary representation of the number, or '0' if input is 0.
+    """
     if n == 0:
         return "0"
-    binario = ""
+    binary = ""
     while n > 0:
-        residuo = n % 2
-        binario = str(residuo) + binario
+        remainder = n % 2
+        binary = str(remainder) + binary
         n //= 2
-    return binario
+    return binary
 
-def main():
+def animate_loading_bar(label, callback, step=0, duration=2000):
+    """Animates a loading bar in the GUI with color changes based on percentage.
+
+    Args:
+        label (tk.Label): Label to display the loading bar.
+        callback (function): Function to call after animation completes.
+        step (int): Current step in the animation.
+        duration (int): Total duration of the animation in milliseconds.
+    """
+    total_steps = 40
+    interval = duration // total_steps
+    percentage = (step / total_steps) * 100
+
+    if percentage <= 30:
+        color = "#FF0000"  # Red
+    elif percentage <= 60:
+        color = "#FFFF00"  # Yellow
+    elif percentage <= 90:
+        color = "#00FF00"  # Green
+    else:
+        color = "#FF00FF"  # Violet
+
+    if step < total_steps:
+        label.config(text=label.cget("text") + "█", fg=color)
+        label.after(interval, animate_loading_bar, label, callback, step + 1, duration)
+    else:
+        label.config(text="", fg="white")
+        callback()
+
+def convert_to_binary():
+    """Converts the input decimal number to binary and updates the GUI.
+
+    Retrieves the input, validates it, shows a loading animation, and displays the result.
+    """
+    text = input_entry.get().strip()
+    if not text:
+        messagebox.showwarning("Warning", "Please enter a number.")
+        return
+    if text.lower() == "salir":
+        window.destroy()
+        return
+
     try:
-        entrada = input((Fore.CYAN if COLORAMA_AVAILABLE else "") + "Ingrese un número decimal (o 'salir' para terminar): \n--- " + (Style.RESET_ALL if COLORAMA_AVAILABLE else ""))
-        if entrada.lower() == "salir":
-            print((Fore.YELLOW if COLORAMA_AVAILABLE else "") + "Saliendo del programa..." + (Style.RESET_ALL if COLORAMA_AVAILABLE else ""))
-            slip(1)
-            return False  # Devuelve False para indicar que hay que terminar el loop
-        num = int(entrada)
-        slip(0.5)
-        print((Fore.BLUE if COLORAMA_AVAILABLE else "") + "\nProcesando..." + (Style.RESET_ALL if COLORAMA_AVAILABLE else ""))
-        barra_de_carga()
-        binario = decimal_a_binario(num)
-        print((Fore.GREEN if COLORAMA_AVAILABLE else "") + f"El número {num} en binario es: \n |||   {binario}   |||\n" + (Style.RESET_ALL if COLORAMA_AVAILABLE else ""))
-        slip(0.5)
+        num = int(text)
+        if num < 0:
+            raise ValueError
+        input_entry.config(state="disabled")
+        translate_button.config(state="disabled")
+        output_label.config(text="")  # Clear output before animation
+        animate_loading_bar(loading_label, lambda: show_result(num))
     except ValueError:
-        print((Fore.RED if COLORAMA_AVAILABLE else "") + "Error: Ingrese un número ENTERO válido.\n" + (Style.RESET_ALL if COLORAMA_AVAILABLE else ""))
-        slip(0.5)
-    return True  # Devuelve True para seguir el loop
+        messagebox.showerror("Error", "Please enter a valid non-negative integer.")
+        input_entry.config(state="normal")
+        translate_button.config(state="normal")
 
-if __name__ == "__main__":
-    while True:
-        if not main():
-            break  # Rompe el loop cuando `main()` devuelve False
+def show_result(num):
+    """Displays the binary conversion result.
+
+    Args:
+        num (int): Decimal number to convert.
+    """
+    binary = decimal_to_binary(num)
+    output_label.config(text=binary)
+    loading_label.config(text="")
+    input_entry.config(state="normal")
+    translate_button.config(state="normal")
+
+# GUI Setup
+bg_color = "#3c739f"
+
+window = tk.Tk()
+window.title("Decimal to Binary Converter")
+window.geometry("600x500")
+window.minsize(400, 250)
+window.configure(bg=bg_color)
+
+label = tk.Label(window, text="Decimal to Binary converter", font=("Arial", 16), bg=bg_color, fg="white")
+label.pack(pady="10 0", fill="both")
+
+input_entry = tk.Entry(window, width=40, font=("Arial", 14), background="white", fg="black", borderwidth=3, relief="solid", cursor="xterm")
+input_entry.pack(pady=10, padx=20, fill="both")
+
+translate_button = tk.Button(window, text="CONVERT", command=convert_to_binary, font=("Arial", 14), bg="#409243", fg="white", borderwidth=3, relief="raised", cursor="hand2", activebackground="#6AB76D")
+translate_button.pack()
+
+loading_label = tk.Label(window, text="", font=("Arial", 12), bg=bg_color, fg="white", anchor="center", justify="center")
+loading_label.pack(pady=5)
+
+output_label = tk.Label(window, text="", font=("Arial", 20), bg="white", fg="black", anchor="center", justify="center", borderwidth=3, relief="solid", wraplength=560)
+output_label.pack(padx=10, pady=10, fill="both", expand=True)
+
+window.mainloop()
