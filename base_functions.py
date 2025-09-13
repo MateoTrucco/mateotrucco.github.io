@@ -17,6 +17,20 @@ wait(taim) - espera taim segundos
 
 import time
 import winsound
+import platform
+
+def rezize(tk):
+    if platform.system() == "Windows":
+        try:
+            from ctypes import windll
+            windll.shcore.SetProcessDpiAwareness(1)
+        except:
+            pass
+    elif platform.system() in ["Darwin", "Linux"]:
+        try:
+            tk.Tk().call('tk', 'scaling', 2.0)
+        except:
+            pass
 
 def wait(taim=0.5):
     time.sleep(taim)

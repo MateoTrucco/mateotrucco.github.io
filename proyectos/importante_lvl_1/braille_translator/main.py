@@ -1,17 +1,7 @@
 import tkinter as tk
-import platform
+from ....base_functions import rezize
 
-if platform.system() == "Windows":
-    try:
-        from ctypes import windll
-        windll.shcore.SetProcessDpiAwareness(1)
-    except:
-        pass
-elif platform.system() in ["Darwin", "Linux"]:
-    try:
-        tk.Tk().call('tk', 'scaling', 2.0)
-    except:
-        pass
+rezize(tk)
 
 BRAILLE_ALPHABET = {
     ' ': [0, 0, 0, 0, 0, 0],

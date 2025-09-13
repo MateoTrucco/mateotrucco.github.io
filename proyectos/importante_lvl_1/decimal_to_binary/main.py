@@ -3,19 +3,6 @@ from tkinter import messagebox
 import platform
 import time
 
-# Enable high DPI scaling
-if platform.system() == "Windows":
-    try:
-        from ctypes import windll
-        windll.shcore.SetProcessDpiAwareness(1)
-    except:
-        pass
-elif platform.system() in ["Darwin", "Linux"]:
-    try:
-        tk.Tk().call('tk', 'scaling', 2.0)
-    except:
-        pass
-
 def sleep(seconds):
     """
     Pauses execution for the specified number of seconds.
@@ -59,13 +46,13 @@ def animate_loading_bar(label, callback, step=0, duration=2000):
     percentage = (step / total_steps) * 100
 
     if percentage <= 30:
-        color = "#FF0000"  # Red
+        color = "#FF0000"
     elif percentage <= 60:
-        color = "#FFFF00"  # Yellow
+        color = "#FFFF00"
     elif percentage <= 90:
-        color = "#00FF00"  # Green
+        color = "#00FF00"
     else:
-        color = "#FF00FF"  # Violet
+        color = "#FF00FF"
 
     if step < total_steps:
         label.config(text=label.cget("text") + "█", fg=color)
@@ -94,7 +81,7 @@ def convert_to_binary():
             raise ValueError
         input_entry.config(state="disabled")
         translate_button.config(state="disabled")
-        output_label.config(text="")  # Clear output before animation
+        output_label.config(text="")
         animate_loading_bar(loading_label, lambda: show_result(num))
     except ValueError:
         messagebox.showerror("Error", "Please enter a valid non-negative integer.")
@@ -114,7 +101,6 @@ def show_result(num):
     input_entry.config(state="normal")
     translate_button.config(state="normal")
 
-# GUI Setup
 bg_color = "#3c739f"
 
 window = tk.Tk()
