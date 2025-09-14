@@ -1,0 +1,78 @@
+# 🛠️ Configurar una nueva clave SSH para GitHub en otra computadora
+
+Este apunte sirve para cuando necesitás subir código a GitHub desde una compu nueva o distinta.
+
+---
+
+## 🔧 1. Generar una nueva clave SSH
+
+ssh-keygen -t ed25519 -C "tu-email@ejemplo.com"
+
+Cuando te pregunte dónde guardar el archivo, poné una ruta como:
+/c/Users/TU_USUARIO/.ssh/id_ed25519_nombreDeLaCompu
+
+(Ejemplo: id_ed25519_laptopTrabajo)
+
+---
+
+## 🔐 2. Agregar la clave al agente SSH
+
+Primero, iniciás el agente:
+
+eval "$(ssh-agent -s)"
+
+Después agregás la clave:
+
+ssh-add ~/.ssh/id_ed25519_nombreDeLaCompu
+
+---
+
+## 📋 3. Copiar la clave pública
+
+cat ~/.ssh/id_ed25519_nombreDeLaCompu.pub
+
+Copiá todo el contenido que aparece (empieza con ssh-ed25519).
+
+---
+
+## 🔗 4. Agregar la clave a GitHub
+
+1. Ir a 👉 https://github.com/settings/keys
+2. Click en "New SSH key"
+3. Poné un nombre (ej: "Mi laptop de casa")
+4. Pegá la clave pública
+5. Click en "Add SSH key"
+
+---
+
+## 🔄 5. Configurar el repo local para usar SSH
+
+Verificá la URL del remoto:
+
+git remote -v
+
+Si ves una URL con HTTPS, cambiala a SSH:
+
+git remote set-url origin git@github.com:usuario/repositorio.git
+
+(Sustituí "usuario" y "repositorio" con los reales.)
+
+---
+
+## ✅ 6. Probar conexión con GitHub
+
+ssh -T git@github.com
+
+Esperás una respuesta como:
+
+Hi tu-usuario! You've successfully authenticated, but GitHub does not provide shell access.
+
+---
+
+## 🚀 7. Hacer git push
+
+git push origin nombre-de-la-rama
+
+---
+
+💡 Tip: guardá este texto como setup-ssh-github.md o setup.txt y lo tenés listo para futuras máquinas.
