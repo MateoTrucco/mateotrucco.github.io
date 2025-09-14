@@ -75,13 +75,13 @@ def convert_to_binary():
         if num < 0:
             raise ValueError
         input_entry.config(state="disabled")
-        translate_button.config(state="disabled")
+        action_button.config(state="disabled")
         output_label.config(text="")
         animate_loading_bar(loading_label, lambda: show_result(num))
     except ValueError:
         messagebox.showerror("Error", "Please enter a valid non-negative integer.")
         input_entry.config(state="normal")
-        translate_button.config(state="normal")
+        action_button.config(state="normal")
 
 def show_result(num):
     """
@@ -94,7 +94,7 @@ def show_result(num):
     output_label.config(text=binary)
     loading_label.config(text="")
     input_entry.config(state="normal")
-    translate_button.config(state="normal")
+    action_button.config(state="normal")
 
 bg_body = colors["++"]
 bg_int = colors["-"]
@@ -121,8 +121,8 @@ label.grid(row=0, column=0, padx=20, pady=(10, 0), sticky="ew")
 input_entry = tk.Entry(window, width=40, font=("Arial", 14), bg=bg_int, fg=fg_int, borderwidth=3, relief="solid", cursor="xterm")
 input_entry.grid(row=1, column=0, padx=20, pady=10, sticky="ew")
 
-translate_button = tk.Button(window, text="CONVERT", command=convert_to_binary, font=("Arial", 14), bg=bg_button, fg=fg_button, borderwidth=3, relief="raised", cursor="hand2", activebackground=bg_int, activeforeground=fg_int)
-translate_button.grid(row=2, column=0, padx=20, pady=10, sticky="ew")
+action_button = tk.Button(window, text="CONVERT", command=convert_to_binary, font=("Arial", 14), bg=bg_button, fg=fg_button, borderwidth=3, relief="raised", cursor="hand2", activebackground=bg_int, activeforeground=fg_int)
+action_button.grid(row=2, column=0, padx=20, pady=10, sticky="ew")
 
 loading_label = tk.Label(window, text="", font=("Arial", 12), bg=bg_body, fg=fg_int, anchor="center", justify="center")
 loading_label.grid(row=3, column=0, padx=20, pady=5, sticky="ew")

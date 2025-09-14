@@ -3,6 +3,7 @@ from collections import deque
 import os, sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
 from base_functions import enable_high_dpi, colors
+
 enable_high_dpi()
 
 FINAL_STATE = ((1, 2, 3), (4, 5, 6), (7, 8, 0))
@@ -119,7 +120,7 @@ def solve_puzzle():
     if solution:
         moves_label.config(text=f"Moves:\n{' '.join(solution)}")
     else:
-        moves_label.config(text="No solution found.")
+        moves_label.config(text="\nNo solution found.")
 
 def step_solution():
     global solution, solution_index
