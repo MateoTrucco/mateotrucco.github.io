@@ -2,10 +2,10 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 import subprocess
 import os, sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
-from base_functions import enable_high_dpi
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
+# from base_functions import enable_high_dpi
 
-enable_high_dpi()
+# enable_high_dpi()
 
 def select_file():
     """

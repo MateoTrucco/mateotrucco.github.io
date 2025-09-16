@@ -9,14 +9,15 @@ from base_functions import enable_high_dpi, colors
 
 enable_high_dpi()
 
-# Colores del tema
 bg_body = colors["++"]
 bg_int = colors["-"]
 fg_int = colors["b"]
 bg_button = colors["+"]
 fg_button = colors["b"]
 
-def load_idioms(archivo="json/idioms.json"):
+def load_idioms(archivo=None):
+    if archivo is None:
+        archivo = os.path.join(os.path.dirname(__file__), "json", "idioms.json")
     try:
         with open(archivo, "r", encoding="utf-8") as f:
             return json.load(f)
@@ -79,7 +80,6 @@ def show_result(text):
     action_button.config(state="normal")
     loading_label.config(text="")
 
-# GUI
 window = tk.Tk()
 window.title("Spanish Spell Checker")
 window.geometry("600x500")
@@ -93,21 +93,16 @@ window.rowconfigure(2, weight=0)
 window.rowconfigure(3, weight=0)
 window.rowconfigure(4, weight=1)
 
-label = tk.Label(window, text="Spanish Spell Checker", font=("Arial", 16, "bold"),
-                 bg=bg_int, fg=fg_int, borderwidth=3, relief="solid", anchor="center", justify="center")
+label = tk.Label(window, text="Spanish Spell Checker", font=("Arial", 16, "bold"), bg=bg_int, fg=fg_int, borderwidth=3, relief="solid", anchor="center", justify="center")
 label.grid(row=0, column=0, padx=20, pady=(10, 0), sticky="ew")
 
-input_entry = tk.Entry(window, width=40, font=("Arial", 14),
-                       bg=bg_int, fg=fg_int, borderwidth=3, relief="solid", cursor="xterm")
+input_entry = tk.Entry(window, width=40, font=("Arial", 14), bg=bg_int, fg=fg_int, borderwidth=3, relief="solid", cursor="xterm")
 input_entry.grid(row=1, column=0, padx=20, pady=10, sticky="ew")
 
-action_button = tk.Button(window, text="CORREGIR", command=correct_and_display_text,
-                          font=("Arial", 14), bg=bg_button, fg=fg_button, borderwidth=3,
-                          relief="raised", cursor="hand2", activebackground=bg_int, activeforeground=fg_int)
+action_button = tk.Button(window, text="CHECK", command=correct_and_display_text, font=("Arial", 14), bg=bg_button, fg=fg_button, borderwidth=3, relief="raised", cursor="hand2", activebackground=bg_int, activeforeground=fg_int)
 action_button.grid(row=2, column=0, padx=20, pady=10, sticky="ew")
 
-loading_label = tk.Label(window, text="", font=("Arial", 12),
-                         bg=bg_body, fg=fg_int, anchor="center", justify="center")
+loading_label = tk.Label(window, text="", font=("Arial", 12), bg=bg_body, fg=fg_int, anchor="center", justify="center")
 loading_label.grid(row=3, column=0, padx=20, pady=5, sticky="ew")
 
 output_frame = tk.Frame(window, bg=bg_int, borderwidth=3, relief="solid")
