@@ -166,6 +166,7 @@ root = make_screen(
     button_command=translate_text,
     button_text="TRANSLATE",
     )
+
 window = root["window"]
 input_text = root["input_text"]
 output_label = root["output_label"]
