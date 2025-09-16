@@ -199,7 +199,7 @@ window.addEventListener('DOMContentLoaded', () => {
   cartas.forEach((_, index) => actualizarVisualCarta(index));
 
   // Agregar eventos de selección y transformación 3D
-  const cartasArea = document.querySelector('#cartas-area');
+  // Removed unused variable declaration for 'cartasArea'
   document.querySelectorAll('[data-carta]').forEach((btn, index) => {
     btn.addEventListener('click', () => seleccionarCarta(index));
     btn.addEventListener('mousemove', hoverCard);

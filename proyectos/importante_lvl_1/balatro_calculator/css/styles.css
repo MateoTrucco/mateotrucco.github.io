@@ -1,12 +1,34 @@
+/* Variables CSS para colores y valores comunes */
+:root {
+  --font-family: 'BalatroFont', monospace;
+  --color-bg: #2a4d3e;
+  --color-text: #eee;
+  --color-panel-bg: #202a20;
+  --color-panel-border: #0c1a08;
+  --color-button-blue: #2b73d9;
+  --color-button-blue-hover: #4a8eed;
+  --color-button-red: #c13131;
+  --color-button-red-hover: #e55353;
+  --color-num-blue: #82c1ff;
+  --color-num-red: #ff6f6f;
+  --color-shadow: rgba(0, 0, 0, 0.7);
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.3s ease;
+}
+
+/* Fuente personalizada */
 @font-face {
   font-family: 'BalatroFont';
   src: url('https://cdn.jsdelivr.net/gh/astrit/css-pixel-font/pixel-font.css');
 }
+
+/* Estilo global */
 body {
-  margin: 0; padding: 0;
-  background-color: #2a4d3e;
-  font-family: 'BalatroFont', monospace;
-  color: #eee;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg);
+  font-family: var(--font-family);
+  color: var(--color-text);
   user-select: none;
   overflow-x: hidden;
 }
@@ -15,11 +37,15 @@ body::before {
   content: "";
   pointer-events: none;
   position: fixed;
-  top:0; left:0; right:0; bottom:0;
-  background: repeating-radial-gradient(circle at 50% 50%, rgba(0,0,0,0.05) 0 1px, transparent 2px 4px);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.05) 0 1px, transparent 2px 4px);
   z-index: 0;
 }
 
+/* Contenedor principal */
 #app {
   display: flex;
   height: 100vh;
@@ -31,14 +57,13 @@ body::before {
   z-index: 1;
 }
 
+/* Panel lateral */
 #panel-lateral {
   width: 280px;
-  background: linear-gradient(145deg, #202a20, #11210f);
-  border: 3px solid #0c1a08;
+  background: linear-gradient(145deg, var(--color-panel-bg), #11210f);
+  border: 3px solid var(--color-panel-border);
   border-radius: 8px;
-  box-shadow:
-    inset 0 0 10px #10510a,
-    0 4px 6px rgba(0,0,0,0.7);
+  box-shadow: inset 0 0 10px #10510a, 0 4px 6px var(--color-shadow);
   padding: 16px 12px;
   display: flex;
   flex-direction: column;
@@ -47,8 +72,9 @@ body::before {
   font-size: 18px;
 }
 
+/* Botones */
 .button-blue {
-  background-color: #2b73d9;
+  background-color: var(--color-button-blue);
   border: 3px solid #1f4f9d;
   text-align: center;
   color: white;
@@ -58,21 +84,19 @@ body::before {
   user-select: none;
   padding: 8px 0;
   border-radius: 4px;
-  box-shadow:
-    inset 0 0 10px #62a3ff,
-    0 3px 0 #163269;
-  transition: background-color 0.2s ease;
+  box-shadow: inset 0 0 10px #62a3ff, 0 3px 0 #163269;
+  transition: background-color var(--transition-fast);
 }
 .button-blue:hover {
-  background-color: #4a8eed;
+  background-color: var(--color-button-blue-hover);
 }
 .button-blue.active {
-  background-color: #4a8eed;
+  background-color: var(--color-button-blue-hover);
   box-shadow: inset 0 0 12px #82b3ff;
 }
 
 .button-red {
-  background-color: #c13131;
+  background-color: var(--color-button-red);
   border: 3px solid #7d1f1f;
   text-align: center;
   color: white;
@@ -82,19 +106,18 @@ body::before {
   user-select: none;
   padding: 7px 0;
   border-radius: 4px;
-  box-shadow:
-    inset 0 0 8px #ff5858,
-    0 3px 0 #521212;
-  transition: background-color 0.2s ease;
+  box-shadow: inset 0 0 8px #ff5858, 0 3px 0 #521212;
+  transition: background-color var(--transition-fast);
 }
 .button-red:hover {
-  background-color: #e55353;
+  background-color: var(--color-button-red-hover);
 }
 
+/* Números destacados */
 .num-blue {
   font-size: 48px;
   font-weight: bold;
-  color: #82c1ff;
+  color: var(--color-num-blue);
   text-shadow: 2px 2px 0 #0c2e5d;
   user-select: none;
   line-height: 1;
@@ -103,12 +126,13 @@ body::before {
 .num-red {
   font-size: 48px;
   font-weight: bold;
-  color: #ff6f6f;
+  color: var(--color-num-red);
   text-shadow: 2px 2px 0 #5d0c0c;
   user-select: none;
   line-height: 1;
 }
 
+/* Panel oscuro */
 .panel-dark {
   background: #0a1a0d;
   border: 2px solid #163912;
@@ -118,6 +142,7 @@ body::before {
   user-select: none;
 }
 
+/* Información pequeña */
 .info-small {
   display: flex;
   justify-content: space-between;
@@ -126,6 +151,7 @@ body::before {
   user-select: none;
 }
 
+/* Área de cartas */
 #cartas-area {
   flex: 1;
   background: linear-gradient(135deg, #4b815a, #2d5230);
@@ -140,16 +166,15 @@ body::before {
   box-shadow: inset 0 0 12px #3d6a3a;
 }
 
+/* Botones de cartas */
 button[data-carta], button[data-joker] {
   width: 100px;
   height: 140px;
   background: white;
   border: 2px solid #000;
   border-radius: 6px;
-  box-shadow:
-    1px 1px 0 #ccc,
-    inset 0 0 5px #aaa;
-  font-family: 'BalatroFont', monospace;
+  box-shadow: 1px 1px 0 #ccc, inset 0 0 5px #aaa;
+  font-family: var(--font-family);
   font-weight: bold;
   font-size: 24px;
   cursor: pointer;
@@ -160,7 +185,7 @@ button[data-carta], button[data-joker] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: transform 0.15s ease;
+  transition: transform var(--transition-fast);
   text-shadow: 1px 1px 0 white;
 }
 button[data-carta] span, button[data-joker] span {
@@ -172,9 +197,7 @@ button[data-carta] span, button[data-joker] span {
 
 button[data-carta].selected, button[data-joker].selected {
   border-color: #6cf36c;
-  box-shadow:
-    0 0 8px #6cf36c,
-    inset 0 0 10px #a5fca5;
+  box-shadow: 0 0 8px #6cf36c, inset 0 0 10px #a5fca5;
   animation: temblor 0.3s infinite alternate;
   transform-origin: center center;
   z-index: 10;
@@ -185,6 +208,7 @@ button[data-carta].selected, button[data-joker].selected {
   100% { transform: translate(-1px, 1px) rotate(1deg); }
 }
 
+/* Panel de modificadores */
 #modificadores-panel {
   width: 250px;
   background: #143118;
@@ -195,6 +219,7 @@ button[data-carta].selected, button[data-joker].selected {
   font-size: 16px;
 }
 
+/* Otros estilos */
 input[type="radio"], select, input[type="text"], input[type="number"] {
   cursor: pointer;
   margin-right: 8px;
@@ -236,7 +261,7 @@ input[type="radio"], select, input[type="text"], input[type="number"] {
   padding: 10px;
   cursor: pointer;
   user-select: none;
-  transition: background-color 0.3s ease;
+  transition: background-color var(--transition-medium);
   box-shadow: inset 0 0 10px #61d361;
 }
 #calcular-btn:hover {
@@ -261,7 +286,7 @@ input[type="radio"], select, input[type="text"], input[type="number"] {
   background: #0a2a0a;
   border-radius: 8px;
   padding: 12px;
-  font-family: 'BalatroFont', monospace;
+  font-family: var(--font-family);
   font-size: 16px;
   white-space: pre-wrap;
   user-select: text;
@@ -269,6 +294,7 @@ input[type="radio"], select, input[type="text"], input[type="number"] {
   box-shadow: inset 0 0 8px #229922;
 }
 
+/* Botón naranja */
 .button-orange {
   background-color: #d97a1d;
   border: 3px solid #6a4209;
@@ -279,14 +305,13 @@ input[type="radio"], select, input[type="text"], input[type="number"] {
   border-radius: 5px;
   cursor: pointer;
   user-select: none;
-  box-shadow:
-    inset 0 0 7px #f0ad46,
-    0 3px 0 #573600;
+  box-shadow: inset 0 0 7px #f0ad46, 0 3px 0 #573600;
 }
 .button-orange:hover {
   background-color: #f09c29;
 }
 
+/* Contenido de pestañas */
 .tab-content {
   display: none;
 }
@@ -294,6 +319,7 @@ input[type="radio"], select, input[type="text"], input[type="number"] {
   display: block;
 }
 
+/* Área de joker */
 #joker-area {
   display: flex;
   flex-wrap: wrap;

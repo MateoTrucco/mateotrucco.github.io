@@ -1,9 +1,10 @@
 let cookies = getCookie("cookies") || 0;
-let cookiesPerClick = getCookie("cookiesPerClick") || 5;
+let cookiesPerClick = getCookie("cookiesPerClick") || 1;
 let cookiesPerSecond = getCookie("cookiesPerSecond") || 0;
 let upgradeCost = getCookie("upgradeCost") || 10;
-let cursorCost = getCookie("cursorCost") || 20;
+let cursorCost = getCookie("cursorCost") || 100;
 let cursors = getCookie("cursors") || 0;
+let grandmas = getCookie("grandmas") || 0;
 
 function clickCookie() {
   cookies += cookiesPerClick;
@@ -15,7 +16,7 @@ function buyUpgrade() {
   if (cookies >= upgradeCost) {
     cookies -= upgradeCost;
     cookiesPerClick += 1;
-    upgradeCost *= 2;
+    upgradeCost *= 1.5;
     updateCookieCount();
     updateCookiesPerClick();
     updateUpgradeCost();
@@ -29,7 +30,7 @@ function buyCursor() {
   if (cookies >= cursorCost) {
     cookies -= cursorCost;
     cursors += 1;
-    cursorCost *= 2;
+    cursorCost *= 1.5;
     updateCookieCount();
     updateCursors();
     updateCursorCost();
@@ -39,8 +40,18 @@ function buyCursor() {
   }
 }
 
+function buyGrandma() {
+  cookies += cookiesPerClick;
+  updateGrandmaCount();
+  saveDataToCookies();
+}
+
 function updateCookieCount() {
   document.getElementById("cookies").innerText = "Cookies: " + cookies;
+}
+
+function updateGrandmaCount() {
+  document.getElementById("grandmas").innerText = "ABUELASSSS: " + grandmas;
 }
 
 function updateCookiesPerClick() {
