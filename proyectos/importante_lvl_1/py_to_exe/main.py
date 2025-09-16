@@ -1,31 +1,35 @@
-import os
-import sys
-import subprocess
-from tkinter import filedialog
-import tkinter as tk
+# -------------------- IMPORTS --------------------
+try:
+    import sys, os, subprocess
+    import tkinter as tk
+    from tkinter import filedialog
+    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
+    from base_functions import enable_high_dpi, make_screen
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
-from base_functions import enable_high_dpi, make_screen
+    enable_high_dpi()
+except ImportError:
+    print("Error: base_functions module not found. Please ensure it is in the correct directory.")
+    sys.exit(1)
 
-enable_high_dpi()
-
-# ----------------------------
-# Funciones de botones
-# ----------------------------
-
+# -------------------- FUNCTIONS --------------------
 def select_file():
+    """Open a file dialog to select a Python file."""
     file_path = filedialog.askopenfilename(filetypes=[("Python Files", "*.py")])
     if file_path:
         file_entry.delete(0, tk.END)
         file_entry.insert(0, file_path)
 
+# --------------------------------------------------
 def select_destination():
+    """Open a directory dialog to select a destination folder."""
     folder_path = filedialog.askdirectory()
     if folder_path:
         destination_entry.delete(0, tk.END)
         destination_entry.insert(0, folder_path)
 
+# --------------------------------------------------
 def convert_to_exe():
+    """Convert the selected Python file to an EXE using PyInstaller."""
     file_path = file_entry.get()
     destination_folder = destination_entry.get()
     if not file_path or not destination_folder:
@@ -41,12 +45,9 @@ def convert_to_exe():
     except subprocess.CalledProcessError:
         pass
 
-# ----------------------------
-# Crear UI
-# ----------------------------
-
+# -------------------- GUI SETUP --------------------
 ui = make_screen(
-    title="Python → EXE Converter",
+    title="Python to EXE Converter",
     winsize="650x200",
     use_title=False, use_input=False, use_button=False,
     use_loading_bar=False, use_output=False,
@@ -54,8 +55,7 @@ ui = make_screen(
 
 window = ui["window"]
 
-
-# --- Widgets ---
+# -------------------- UI ELEMENTS --------------------
 file_label = ui["add_element"](
     "label", text="Select Python File:", row=0, col=0, padx=10, pady=10
 )
@@ -82,4 +82,5 @@ convert_button = ui["add_element"](
     row=2, col=0, padx=10, pady=10, colspan="all"
 )
 
+# -------------------- MAIN LOOP --------------------
 window.mainloop()

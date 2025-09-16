@@ -1,3 +1,4 @@
+# -------------------- IMPORTS --------------------
 try:
     import sys
     import os
@@ -9,6 +10,7 @@ except ImportError:
     print("Error: base_functions module not found. Please ensure it is in the correct directory.")
     sys.exit(1)
 
+# -------------------- VARIABLES --------------------
 BRAILLE_ALPHABET = {
     ' ': (0,0,0,0,0,0),
     'a': (1,0,0,0,0,0),
@@ -68,6 +70,7 @@ BRAILLE_ALPHABET = {
     '*': (0,0,1,0,1,0),
 }
 
+# -------------------- FUNCTIONS --------------------
 def create_braille_pattern(p1, p2, p3, p4, p5, p6):
     """
     Creates a braille pattern from six dot positions.
@@ -80,6 +83,7 @@ def create_braille_pattern(p1, p2, p3, p4, p5, p6):
     """
     return (p1, p4, p2, p5, p3, p6)
 
+# --------------------------------------------------
 def render_braille_char(char):
     """
     Renders a single character as a 3x2 braille cell.
@@ -100,6 +104,7 @@ def render_braille_char(char):
         ['•' if dots[2] else ' ', '•' if dots[5] else ' ']
     ]
 
+# --------------------------------------------------
 def translate_to_braille_board(text, max_chars=10):
     """
     Translates text to a horizontal braille board with dynamic line breaks.
@@ -141,17 +146,17 @@ def translate_to_braille_board(text, max_chars=10):
 
     return "\n\n".join(boards)
 
+# --------------------------------------------------
 def translate_text():
-    """Translates input text to braille and displays it in the GUI.
-
-    Retrieves text from the input field, translates it, and updates the output label.
-    """
+    """Translates input text to braille and displays it in the GUI."""
     text = input_text.get().strip()
     result = translate_to_braille_board(text)
     output_label.config(text=result, wraplength=window.winfo_width() - 10)
 
+# --------------------------------------------------
 def update_board(event=None):
-    """Updates the braille board when the window is resized.
+    """
+    Updates the braille board when the window is resized.
 
     Args:
         event: Tkinter event object (optional).
@@ -161,14 +166,17 @@ def update_board(event=None):
         result = translate_to_braille_board(text)
         output_label.config(text=result, wraplength=window.winfo_width() - 10)
 
-root = make_screen(
+# -------------------- GUI SETUP --------------------
+ui = make_screen(
     title="Braille Translator",
     button_command=translate_text,
     button_text="TRANSLATE",
-    )
+    loading_steps=30
+)
 
-window = root["window"]
-input_text = root["input_text"]
-output_label = root["output_label"]
+window = ui["window"]
+input_text = ui["input_text"]
+output_label = ui["output_label"]
 
+# -------------------- MAIN LOOP --------------------
 window.mainloop()
