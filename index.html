@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Mateo Trucco's portfolio: practical Python tools, desktop applications and web projects." />
+    <meta name="theme-color" content="#0b1020" />
+    <title>Mateo Trucco — Python Developer</title>
+    <link rel="icon" href="static/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="static/css/styles.css" />
+    <script src="static/js/script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Mateo Trucco, home">
+        <span class="brand-mark" aria-hidden="true">MT</span>
+        <span>Mateo Trucco</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch color theme" aria-pressed="false">
+        <span aria-hidden="true">◐</span>
+      </button>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <p class="eyebrow">Python · Automation · Web · Desktop</p>
+          <h1>I build practical tools and turn messy problems into clear solutions.</h1>
+          <p class="hero-intro">
+            I'm Mateo, a programmer from Argentina with years of hands-on learning through personal projects.
+            I focus on useful software, readable code and honest communication about each project's scope.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#projects">Explore projects</a>
+            <a class="button secondary" href="mailto:mateotruccoarias@gmail.com">Start a conversation</a>
+          </div>
+        </div>
+        <div class="terminal-card" aria-label="Developer profile summary">
+          <div class="terminal-top"><span></span><span></span><span></span></div>
+          <pre><code><span class="terminal-muted">$</span> whoami
+Mateo Trucco
+
+<span class="terminal-muted">$</span> focus
+Python tools
+Desktop applications
+Web development
+Problem solving
+
+<span class="terminal-muted">$</span> approach
+learn → build → test → improve</code></pre>
+        </div>
+      </section>
+
+      <section class="section about" id="about">
+        <div>
+          <p class="section-kicker">About me</p>
+          <h2>Curious by default, committed by choice.</h2>
+        </div>
+        <div class="about-copy">
+          <p>
+            I started exploring programming and robotics as a child and have continued learning through courses,
+            experiments and self-directed projects. My strongest work is in Python, where I build algorithms,
+            utilities, automation and desktop interfaces. I also work with Django, HTML, CSS and JavaScript.
+          </p>
+          <p>
+            I learn new tools quickly, but I do not treat client work as an experiment: requirements come first,
+            limitations are communicated clearly, and deliverables should be understandable and maintainable.
+          </p>
+          <ul class="skill-list" aria-label="Main skills">
+            <li>Python</li><li>Tkinter</li><li>Django</li><li>HTML & CSS</li><li>JavaScript</li><li>Testing</li><li>Git</li><li>Automation</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Selected work</p>
+            <h2>Projects with a clear, testable scope.</h2>
+          </div>
+          <div class="filters" role="group" aria-label="Filter projects">
+            <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">All</button>
+            <button class="filter" type="button" data-filter="python" aria-pressed="false">Python</button>
+            <button class="filter" type="button" data-filter="web" aria-pressed="false">Web</button>
+            <button class="filter" type="button" data-filter="desktop" aria-pressed="false">Desktop</button>
+          </div>
+        </div>
+
+        <div class="project-grid" aria-live="polite">
+          <article class="project-card featured" data-categories="python desktop algorithm">
+            <div class="project-visual puzzle-visual" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span></span></div>
+            <div class="project-body">
+              <div class="project-meta"><span>Featured</span><span>Python · A*</span></div>
+              <h3>Sliding Puzzle Solver</h3>
+              <p>A playable desktop puzzle with solvability checks, Manhattan-distance A* search, animation and unit-tested move logic.</p>
+              <div class="project-links">
+                <a href="https://github.com/MateoTrucco/sliding-puzzle-solver" target="_blank" rel="noreferrer">Source code <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card featured" data-categories="python web">
+            <div class="project-visual job-visual" aria-hidden="true"><span>Open roles</span><strong>Search. Filter. Publish.</strong><i></i><i></i><i></i></div>
+            <div class="project-body">
+              <div class="project-meta"><span>Featured</span><span>Django</span></div>
+              <h3>Django Job Board</h3>
+              <p>A moderated job board with authentication, ownership rules, search, filters, pagination and environment-based settings.</p>
+              <div class="project-links">
+                <a href="https://github.com/MateoTrucco/django-job-board" target="_blank" rel="noreferrer">Source code <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-categories="python desktop">
+            <div class="project-visual braille-visual" aria-hidden="true"><span>⠠⠍⠁⠞⠑⠕</span><small>Text → dots → Unicode</small></div>
+            <div class="project-body">
+              <div class="project-meta"><span>Accessibility study</span><span>Python · Tkinter</span></div>
+              <h3>Six-dot Braille Visualizer</h3>
+              <p>An educational six-dot visualizer with capital and number indicators, Unicode output, unknown-character reporting and tests.</p>
+              <div class="project-links">
+                <a href="https://github.com/MateoTrucco/braille-translator" target="_blank" rel="noreferrer">Source code <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-categories="python desktop">
+            <div class="project-visual packager-visual" aria-hidden="true"><span>.py</span><b>→</b><span>.exe</span></div>
+            <div class="project-body">
+              <div class="project-meta"><span>Developer tool</span><span>Python · PyInstaller</span></div>
+              <h3>Python App Packager</h3>
+              <p>A safer graphical command builder that validates inputs, streams packaging logs and runs PyInstaller without shell interpolation.</p>
+              <div class="project-links">
+                <a href="https://github.com/MateoTrucco/python-exe-builder" target="_blank" rel="noreferrer">Source code <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-categories="python desktop">
+            <div class="project-visual math-visual" aria-hidden="true"><span>1010₂</span><span>3√5</span><span>i³</span><span>x̄</span></div>
+            <div class="project-body">
+              <div class="project-meta"><span>Utility suite</span><span>Python · Tkinter</span></div>
+              <h3>Math Utility Toolkit</h3>
+              <p>Five small exercises consolidated into one validated app: base conversion, root simplification, averages, powers of i and percentages.</p>
+              <div class="project-links">
+                <a href="https://github.com/MateoTrucco/math-utility-suite" target="_blank" rel="noreferrer">Source code <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-categories="web">
+            <div class="project-visual cards-visual" aria-hidden="true"><span>10♠</span><span>J♠</span><span>Q♠</span><span>K♠</span><span>A♠</span></div>
+            <div class="project-body">
+              <div class="project-meta"><span>Web prototype</span><span>JavaScript</span></div>
+              <h3>Card Score Sandbox</h3>
+              <p>A deliberately scoped card-scoring prototype with hand detection, card selection and a standalone tested logic module.</p>
+              <div class="project-links">
+                <a href="https://mateotrucco.github.io/balatro-score-calculator/" target="_blank" rel="noreferrer">Live demo</a>
+                <a href="https://github.com/MateoTrucco/balatro-score-calculator" target="_blank" rel="noreferrer">Code <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-categories="web">
+            <div class="project-visual cookie-visual" aria-hidden="true"><span>🍪</span><strong>1,248</strong><small>cookies</small></div>
+            <div class="project-body">
+              <div class="project-meta"><span>Web game</span><span>JavaScript</span></div>
+              <h3>Cookie Lab</h3>
+              <p>A compact incremental game with upgrades, elapsed-time production, versioned local storage, reset controls and tested state logic.</p>
+              <div class="project-links">
+                <a href="https://github.com/MateoTrucco/python-labs/tree/main/cookie-lab" target="_blank" rel="noreferrer">Live demo</a>
+                <a href="https://github.com/MateoTrucco/python-labs/tree/main/cookie-lab" target="_blank" rel="noreferrer">Code <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-categories="python desktop">
+            <div class="project-visual language-visual" aria-hidden="true"><span>toy re manija</span><b>→</b><span>estoy muy entusiasmado</span></div>
+            <div class="project-body">
+              <div class="project-meta"><span>Text processing</span><span>Python · JSON</span></div>
+              <h3>Argentine Slang Normalizer</h3>
+              <p>A transparent phrase-normalization tool that uses curated whole-word replacements while preserving names, case and punctuation.</p>
+              <div class="project-links">
+                <a href="https://github.com/MateoTrucco/spell-checker" target="_blank" rel="noreferrer">Source code <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </article>
+        </div>
+        <p class="empty-state" hidden>No projects match this filter.</p>
+      </section>
+
+      <section class="section principles">
+        <p class="section-kicker">How I work</p>
+        <div class="principle-grid">
+          <article><span>01</span><h3>Define the real problem</h3><p>I clarify the expected input, output and edge cases before adding features.</p></article>
+          <article><span>02</span><h3>Build in small steps</h3><p>I separate logic from interfaces so the important behavior can be tested.</p></article>
+          <article><span>03</span><h3>Communicate honestly</h3><p>I document what works, what is limited and what still needs validation.</p></article>
+        </div>
+      </section>
+
+      <section class="section contact" id="contact">
+        <div>
+          <p class="section-kicker">Contact</p>
+          <h2>Have a practical problem to solve?</h2>
+          <p>Tell me what you need, what you already have and what a successful result looks like.</p>
+        </div>
+        <div class="contact-actions">
+          <a class="button primary" href="mailto:mateotruccoarias@gmail.com">mateotruccoarias@gmail.com</a>
+          <a class="button secondary" href="https://github.com/MateoTrucco" target="_blank" rel="noreferrer">GitHub profile <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© <span id="year">2026</span> Mateo Trucco. Built with semantic HTML, CSS and JavaScript.</p>
+    </footer>
+  </body>
+</html>

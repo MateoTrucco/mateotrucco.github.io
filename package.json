@@ -1,0 +1,8 @@
+{
+  "name": "mateotrucco-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node tests/site.test.mjs"
+  }
+}
