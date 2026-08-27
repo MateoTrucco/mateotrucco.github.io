@@ -1,29 +1,16 @@
 # Mateo Trucco — Portfolio
 
-Source code for [mateotrucco.github.io](https://mateotrucco.github.io), a responsive portfolio built with semantic HTML, CSS and vanilla JavaScript.
+Live site: **https://mateotrucco.github.io/**
 
-## Features
+This repository contains only the portfolio site. Each project has its own repository and GitHub Pages demo.
 
-- Responsive project grid and category filters
-- Light/dark theme with local preference storage
-- Keyboard-friendly navigation and semantic markup
-- Project links pointing to standalone repositories
-- Custom 404 page, favicon, robots file and sitemap
+## Live demo strategy
 
-## Local preview
+- Native HTML/CSS/JavaScript projects run directly.
+- Pure Python project logic runs in-browser through versioned Pyodide **314.0.4**.
+- OS-bound tools use safe sample data because browsers cannot access the host process list, Windows Registry or `.lnk` COM APIs.
+- The Django project includes a frontend workflow simulator; the actual Django backend remains in its repository.
 
-```bash
-python -m http.server 8000
-```
+## Node.js
 
-Then open `http://localhost:8000`.
-
-## Deployment
-
-Push the contents of this folder to the `main` branch of the repository named exactly `mateotrucco.github.io`. GitHub Pages should publish the site from the repository root.
-
-
-
-
-
-anashex
+Portfolio test tooling is pinned to Node **24.x** (`.nvmrc`, `package.json`, GitHub Actions).

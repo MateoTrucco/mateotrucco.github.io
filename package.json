@@ -1,8 +1,10 @@
 {
-  "name": "mateotrucco-portfolio",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
-    "test": "node tests/site.test.mjs"
+    "test": "node tests/links.test.mjs"
   }
 }

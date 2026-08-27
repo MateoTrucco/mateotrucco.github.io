@@ -1,1 +1,1 @@
-Personal portfolio showcasing practical Python tools, desktop applications and web projects. Built with responsive, accessible HTML, CSS and JavaScript.
+Personal developer portfolio with separated project repositories and live browser demos for Python, JavaScript, Django and desktop/system tools.

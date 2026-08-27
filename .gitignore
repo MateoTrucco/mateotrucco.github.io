@@ -1,16 +1,7 @@
-# Dependencies
 node_modules/
-
-# Test/build output
-coverage/
-dist/
-
-# Editors and OS
-.vscode/
-.idea/
+npm-debug.log*
 .DS_Store
 Thumbs.db
-
-# Local files
+.vscode/
+.idea/
 .env
-*.log
