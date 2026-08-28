@@ -1,1 +1,1 @@
-Personal developer portfolio with separated project repositories and live browser demos for Python, JavaScript, Django and desktop/system tools.
+Bilingual software portfolio with nine focused projects, meaningful live workflows, symbolic visuals and shared light/dark preferences.

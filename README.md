@@ -1,6 +1,6 @@
 # Mateo Trucco — Portfolio
 
-A dependency-free portfolio that presents fifteen small software projects as a coherent body of work: clear problem framing, testable logic, useful failure states and runnable experiences.
+A dependency-free bilingual portfolio presenting nine intentionally distinct projects. Repeated exercises were consolidated into stronger systems with clear workflows, testable logic and honest platform boundaries.
 
 [![Portfolio home](screenshots/portfolio-home.png)](https://mateotrucco.github.io/)
 
@@ -8,10 +8,12 @@ A dependency-free portfolio that presents fifteen small software projects as a c
 
 ## Experience
 
-- Six selected projects with larger editorial cards
-- Searchable and filterable index for all fifteen repositories
-- Project-specific screenshots with graceful visual fallbacks
-- Persistent light/dark theme and reduced-motion support
+- Five selected projects with larger editorial cards
+- Searchable and filterable index for nine focused repositories
+- Code-native symbolic project visuals instead of brittle screenshots
+- Hand-written English/Spanish content with device-language detection
+- Shared, persistent light/dark preference across portfolio and demos
+- Rotating hero copy, terminal messages, counters, capability chart and reveal animations
 - Responsive layout with skip navigation and semantic landmarks
 - Central project metadata in `static/js/projects.js`
 
@@ -19,7 +21,7 @@ A dependency-free portfolio that presents fifteen small software projects as a c
 
 - Native HTML/CSS/JavaScript projects run directly.
 - Pure Python logic runs in the browser through versioned Pyodide **314.0.4**.
-- OS-bound projects use transparent sample datasets because a browser cannot read host processes, Registry keys or Windows shortcuts.
+- The consolidated system workbench uses transparent, portable snapshots because a browser cannot inspect host processes safely.
 - The Django project exposes its main workflow as an interactive simulator; the real authenticated backend remains in its repository.
 
 ## Local development
